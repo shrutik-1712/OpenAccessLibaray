@@ -6,13 +6,14 @@ import { useEffect, useState } from 'react';
 interface AdvisoryMember {
   name: string;
   image: string;
-  role: string;
+  description: string;
 }
 
 interface TeamMember {
   name: string;
   image: string;
   role: string;
+  description: string;
 }
 
 const About = () => {
@@ -47,6 +48,11 @@ const About = () => {
 
     fetchData();
   }, []);
+
+  // Helper function to construct full image URL
+  const getImageUrl = (imagePath: string) => {
+    return `http://localhost:3001${imagePath}`;
+  };
 
   return (
     <div className="container mx-auto px-4 py-12 max-w-5xl">
@@ -109,17 +115,25 @@ const About = () => {
             <h2 className="text-3xl font-semibold mb-8 flex items-center">
               <Users className="mr-2" /> Library Advisory Committee
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
               {advisoryCommittee.map((member, index) => (
-                <div key={index} className="text-center">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-32 h-32 rounded-full mx-auto mb-4 shadow-md object-cover"
-                  />
-                  <p className="font-semibold text-lg">{member.name}</p>
-                  <p className="text-gray-600">{member.role}</p>
-                </div>
+                <Card key={index} className="p-4">
+                  <div className="text-center">
+                    <div className="relative w-32 h-32 mx-auto mb-4">
+                      <img 
+                        src={getImageUrl(member.image)} 
+                        alt={member.name}
+                        className="rounded-full object-cover w-full h-full shadow-lg"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = '/api/placeholder/128/128';
+                        }}
+                      />
+                    </div>
+                    <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
+                    <p className="text-gray-600 text-sm">{member.description}</p>
+                  </div>
+                </Card>
               ))}
             </div>
           </section>
@@ -130,17 +144,26 @@ const About = () => {
             <h2 className="text-3xl font-semibold mb-8 flex items-center">
               <Users className="mr-2" /> Library Team
             </h2>
-            <div className="grid grid-cols-2 md:grid-cols-4 gap-8">
+            <div className="grid grid-cols-1 md:grid-cols-3 lg:grid-cols-4 gap-8">
               {libraryTeam.map((member, index) => (
-                <div key={index} className="text-center">
-                  <img 
-                    src={member.image} 
-                    alt={member.name} 
-                    className="w-32 h-32 rounded-full mx-auto mb-4 shadow-md object-cover"
-                  />
-                  <p className="font-semibold text-lg">{member.name}</p>
-                  <p className="text-gray-600">{member.role}</p>
-                </div>
+                <Card key={index} className="p-4">
+                  <div className="text-center">
+                    <div className="relative w-32 h-32 mx-auto mb-4">
+                      <img 
+                        src={getImageUrl(member.image)} 
+                        alt={member.name}
+                        className="rounded-full object-cover w-full h-full shadow-lg"
+                        onError={(e) => {
+                          const target = e.target as HTMLImageElement;
+                          target.src = '/api/placeholder/128/128';
+                        }}
+                      />
+                    </div>
+                    <h3 className="font-semibold text-lg mb-1">{member.name}</h3>
+                    <p className="text-gray-600 font-medium mb-1">{member.role}</p>
+                    <p className="text-gray-600 text-sm">{member.description}</p>
+                  </div>
+                </Card>
               ))}
             </div>
           </section>

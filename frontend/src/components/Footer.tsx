@@ -1,6 +1,12 @@
-
 import { Link } from 'react-router-dom';
-import { MapPin, Phone, Facebook, Twitter, Instagram, Linkedin } from 'lucide-react';
+import { MapPin, Phone } from 'lucide-react';
+import { 
+  FaInstagram, 
+  FaYoutube, 
+  FaWhatsapp, 
+  FaTelegram, 
+  FaTwitter 
+} from 'react-icons/fa';
 
 const Footer = () => {
   const navItems = [
@@ -16,10 +22,26 @@ const Footer = () => {
   ];
 
   const socialLinks = [
-    { icon: Facebook, href: "https://facebook.com" },
-    { icon: Twitter, href: "https://twitter.com" },
-    { icon: Instagram, href: "https://instagram.com" },
-    { icon: Linkedin, href: "https://linkedin.com" },
+    { 
+      icon: FaInstagram,
+      href: "https://www.instagram.com/dina_bama_patil_library?utm_source=qr&igsh=d3ZoOHRiZDcxaTU5",
+      title: "Instagram"
+    },
+    { 
+      icon: FaYoutube,
+      href: "https://www.youtube.com/channel/UC7UfKIVmVr3RU6KaNu7tcGQ#:~:text=Share%20your%20videos%20with%20friends,%20family,%20and%20the",
+      title: "YouTube"
+    },
+    { 
+      icon: FaWhatsapp,
+      href: "https://wa.me/message/WTVLGDI34HX5H1",
+      title: "WhatsApp"
+    },
+    { 
+      icon: FaTelegram,
+      href: "https://t.me/dinabamapatillibraryofficial",
+      title: "Telegram"
+    },
   ];
 
   return (
@@ -56,8 +78,15 @@ const Footer = () => {
             <h3 className="text-xl font-bold mb-4">Follow Us</h3>
             <div className="flex justify-center md:justify-end space-x-4">
               {socialLinks.map((link, index) => (
-                <a key={index} href={link.href} target="_blank" rel="noopener noreferrer" className="hover:text-gray-300">
-                  <link.icon size={24} />
+                <a 
+                  key={index} 
+                  href={link.href} 
+                  target="_blank" 
+                  rel="noopener noreferrer" 
+                  className="hover:text-gray-300 transition-colors duration-200"
+                  title={link.title}
+                >
+                  <link.icon size={24} className="hover:scale-110 transition-transform duration-200" />
                 </a>
               ))}
             </div>
