@@ -163,10 +163,11 @@ const bookSchema = new mongoose.Schema({
   cover: {
     type: String,
     required: true,
-    default: "/images/books/default-book.jpg",
+    get: (cover) => `http://localhost:${PORT}${cover}` // Add full URL to cover
   },
+}, {
+  toJSON: { getters: true } // Enable getters when converting to JSON
 });
-
 const Member = mongoose.model("Member", memberSchema);
 
 const TeamMember = mongoose.model("TeamMember", teamMemberSchema);
